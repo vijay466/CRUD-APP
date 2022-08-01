@@ -16,11 +16,14 @@ mongoose.connect(url,{useNewUrlParser:true}).then(() => {
     console.log(err);
     console.log("Not connected")
 })
+app.get('/',(req,res)=> {
+    res.send("CRUD APPLICATION WITH NODE")
+})
 app.use(cors());
 app.use(cookieParser())
 app.use(bodyParser())
 app.use(express.json());
-app.use(express.urlencoded({
+app.use(express.urlencoded({ 
 extended:true
 }));
 const noterequsts  = require('./controller.js')
