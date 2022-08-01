@@ -5,30 +5,31 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const url = process.env.MONGODB_URI
 const bodyParser = require("body-parser")
-app.use(bodyParser.urlencoded({ extended: true }));
 const cookieParser = require('cookie-parser')
-
-
-
+// MIDDLEWARES
+app.use(cors());
+app.use(cookieParser())
+app.use(bodyParser.json())
+app.use(express.json());
+// DB CONNCECTION
 mongoose.connect(url,{useNewUrlParser:true}).then(() => {
-    console.log("connected....")
+    console.log(" DB connected....")
 }).catch(err => {
     console.log(err);
     console.log("Not connected")
 })
+
+
+
 app.get('/',(req,res)=> {
     res.send("CRUD APPLICATION WITH NODE")
 })
-app.use(cors());
-app.use(cookieParser())
-app.use(bodyParser())
-app.use(express.json());
-app.use(express.urlencoded({ 
-extended:true
-}));
-const noterequsts  = require('./controller.js')
-app.use('/notes',noterequsts)
 
+
+
+const noteRoutes  = require('./Routes.js') 
+app.use('/notes',noteRoutes)
+// STARTING A SERVER
 app.listen(process.env.PORT || 3001,() => {
     console.log(`listening on port ${process.env.PORT}`)  
 })

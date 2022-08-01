@@ -1,18 +1,15 @@
-const express = require('express');
-
-const router = express.Router();
-const Notes  = require('./modelschema')
-// GET METHOD 
-router.get('/',async(req,res) => {
+const Notes  = require('../modelschema')
+//GET ALL NOTES
+exports.getAll = async(req,res) => {
     try {
-    const note = await Notes.find()
-    res.json(note)
-    }catch(err) {
-        console.log('error' + err)
-    }
-})
+        const note = await Notes.find()
+        res.json(note)
+        }catch(err) {
+            console.log('error' + err)
+        }
+}
 //POST METHOD
-router.post('/',async(req,res) => {
+exports.postnotes = async(req,res) => {
     const newobj = new Notes( {
         name : req.body.name,
         tech : req.body.tech,
@@ -27,27 +24,27 @@ router.post('/',async(req,res) => {
     }catch(err) {
         console.log('error' + err)
     }
-})
-//GET UNIQUE DATA
-router.get('/:id' ,async(req,res) => {
+}
+//GET UNIQUE NOTES
+exports.getunique = async(req,res) => {
     try {
         const note = await Notes.findById(req.params.id)
         res.json(note);
     }catch(err) {
         console.log('error' + err);
     }
-})
-//DELETE UNIQUE DATA
-router.delete('/:id',async(req,res)=> {
+}
+//DELETE UNIQUE NOTES
+exports.deleteunique = async(req,res) => {
     try {
         const note = await Notes.findByIdAndDelete(req.params.id)
         res.send("succesfully deleted....")
     }catch(err) {
         console.log(err)
     }
-})
-//PUT METHOD
-router.put('/:id',async(req,res) => {
+}
+//UPDATA NOTES
+exports.updatenotes = async(req,res) => {
     try {
         const notes = await Notes.findById(req.params.id);
         notes.name = req.body.name
@@ -58,5 +55,4 @@ router.put('/:id',async(req,res) => {
     }catch (err){
         res.json('error'+ err)
     }
-})
-module.exports = router; 
+}
