@@ -26,9 +26,9 @@ app.get('/',(req,res)=> {
 })
 
 
-
 const noteRoutes  = require('./Routes.js') 
 app.use('/notes',noteRoutes)
+
 // STARTING A SERVER
 app.listen(process.env.PORT || 3001,() => {
     console.log(`listening on port ${process.env.PORT}`)  
