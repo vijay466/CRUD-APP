@@ -22,7 +22,7 @@ mongoose.connect(url,{useNewUrlParser:true}).then(() => {
 
 
 app.get('/',(req,res)=> {
-    res.send("CRUD APPLICATION WITH NODE")
+    res.send("CRUD APPLICATION WITH NODE.JS")
 })
 
 
